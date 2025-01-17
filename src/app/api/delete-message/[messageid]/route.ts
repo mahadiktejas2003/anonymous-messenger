@@ -7,9 +7,9 @@ import {auth } from '../../auth/[...nextAuth]/options';
 
 export async function DELETE(
   request: Request,
-  params: { messageid: string }
+  { params }: { params: { messageid: string } }
 ) {
-  const messageId = params.messageid; //Await needed in params in dynamic routes-> Nextjs 15 update.
+  const { messageid } = params;//Await needed in params in dynamic routes-> Nextjs 15 update.
   await dbConnect();
   const session = await auth()
   const user: User = session?.user as User;
