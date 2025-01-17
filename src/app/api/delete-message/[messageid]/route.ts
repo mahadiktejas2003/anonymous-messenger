@@ -3,18 +3,19 @@ import dbConnect from '@/lib/dbConnect';
 import { User } from 'next-auth';
 import { Message } from '@/model/User';
 import { NextRequest } from 'next/server';
-import { auth } from '../../auth/[...nextAuth]/options';
+import {auth } from '../../auth/[...nextAuth]/options';
 
 export async function DELETE(
-  request: NextRequest,
+  request: Request,
   { params }: { params: { messageid: string } }
 ) {
-  const { messageid } = params;  // No need to await params
-  
+  const messageId = params.messageid; //Await needed in params in dynamic routes-> Nextjs 15 update.
   await dbConnect();
-  const session = await auth();
+  const session = await auth()
   const user: User = session?.user as User;
   if (!session || !user) {
+
+    
     return Response.json(
       { success: false, message: 'Not authenticated' },
       { status: 401 }
@@ -33,13 +34,14 @@ export async function DELETE(
       );
     }
     
+    
     return Response.json(
       { message: 'Message deleted', success: true },
       { status: 200 }
     );
   } catch (error) {
     console.error('Error deleting message:', error);
-    return Response.json(
+    return Response.json(-
       { message: 'Error deleting message', success: false },
       { status: 500 }
     );
