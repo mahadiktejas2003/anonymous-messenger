@@ -15,7 +15,7 @@ import { useSession } from 'next-auth/react'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-export default function UserDashboard(){
+export default function UserDashboard() {
   //states
   const [messages, setMessages] = useState<Message[]>([])
   const [isLoading, setIsLoading]=useState(false)
