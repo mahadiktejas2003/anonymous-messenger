@@ -6,7 +6,7 @@ import { NextRequest } from 'next/server';
 import {auth } from '../../auth/[...nextAuth]/options';
 
 export async function DELETE(
-  request: Request,
+  request: NextRequest,
   { params }: { params: { messageid: string } }
 ) {
   const {messageid} = await params; //Await needed in params in dynamic routes-> Nextjs 15 update.
