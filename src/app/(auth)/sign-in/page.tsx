@@ -19,8 +19,7 @@ import { Loader2 } from "lucide-react"
 import { signInSchema } from "@/schemas/signInSchema"
 import { signIn } from "next-auth/react"
 
-const page = () => {
-
+export default function SignInForm() {
     const {toast} = useToast()
     const router= useRouter()
     //Zod implementation
@@ -106,11 +105,6 @@ const page = () => {
 
           </div>
         </div>
-      </div>
-      
-          
+      </div>    
   )
 }
-
-export default page;
-

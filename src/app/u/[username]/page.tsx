@@ -25,14 +25,14 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { messageSchema } from '@/schemas/messageSchema';
 
-
+const specialChar = '||';
 
 const parseStringMessages = (messageString: string): string[] => {
-  return messageString.split('||');
+  return messageString.split(specialChar);
 };
 
 const initialMessageString =
-  "What's your favorite movie?||Do you have any pets?||What's your dream job? || You are a bad person";
+  "What's your favorite movie?||Do you have any pets?||What's your dream job?";
 
 export default function SendMessage() {
   const params = useParams<{ username: string }>();
@@ -157,9 +157,8 @@ export default function SendMessage() {
                 <Button
                   key={index}
                   variant="outline"
-                  className="mb-2 border-2"
+                  className="mb-2"
                   onClick={() => handleMessageClick(message)}
-                  
                 >
                   {message}
                 </Button>
