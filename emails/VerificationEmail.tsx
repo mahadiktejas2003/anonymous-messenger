@@ -85,7 +85,7 @@ export default function VerificationEmail({ username, otp }: VerificationEmailPr
                         border: "1px solid #fff",
                         marginTop: "16px",
                       }}
-                      href={`http://localhost:3000/verify/${username}`}
+                      href={`https://anonymous-messenger.vercel.app/verify/${username}`}
                     >
                       Verify Now
                     </Button>

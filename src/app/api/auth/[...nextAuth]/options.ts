@@ -84,13 +84,13 @@ export const { auth, handlers, signIn, signOut   }= NextAuth({
             }
             return session
         }
-    },
-    pages:{
-        //to overwrite the sign in page- write it below , otherwise the default is always- signIn:'auth/singin' [see docs]
-        signIn:'/sign-in'
-    },
+    },  
     session:{
         strategy:'jwt'//
     },
     secret:process.env.NEXTAUTH_SECRET,   
+    pages:{
+        //to overwrite the sign in page- write it below , otherwise the default is always- signIn:'auth/singin' [see docs]
+        signIn:'/sign-in'
+    },
 })
