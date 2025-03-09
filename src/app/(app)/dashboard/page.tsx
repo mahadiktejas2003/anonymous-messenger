@@ -173,6 +173,7 @@ export default function UserDashboard() {
         checked={acceptMessages}
         onCheckedChange={handleSwitchChange}
         disabled={isSwitchLoading}
+        className="data-[state=checked]:bg-green-500 data-[state=unchecked]:bg-red-500"
       />
       <span className="ml-2">
         Accept Messages: {acceptMessages ? 'On' : 'Off'}
