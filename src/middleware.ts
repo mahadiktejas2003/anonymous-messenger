@@ -9,7 +9,7 @@ export const config = {
 export async function middleware(request: NextRequest) {
   // const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET}); //Correct one, stores session
   const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET}); 
-
+    console.log("TOKEN VALUE:", token); // Add this line
   const url = request.nextUrl;
 
   // Redirect to dashboard if the user is already authenticated
