@@ -134,7 +134,6 @@ export default function UserDashboard() {
     <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 bg-white rounded w-full max-w-6xl">
       <h1 className="text-4xl font-bold mb-4">User Dashboard</h1>
       <div className="mb-4">
-        {/* ...dashboard header content... */}
       </div>
       <div className="mb-4">
         <Switch
@@ -143,7 +142,6 @@ export default function UserDashboard() {
           disabled={isSwitchLoading}
           className="data-[state=checked]:bg-green-500 data-[state=unchecked]:bg-red-500"
         />
-        {/* ...switch description... */}
       </div>
       <Separator />
       <Button
