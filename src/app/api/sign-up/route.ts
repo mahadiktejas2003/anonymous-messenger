@@ -25,7 +25,9 @@ export async function POST(request: Request) {
     }
 
     const existingUserByEmail = await UserModel.findOne({ email });
-    const verifyCode = Math.floor(100000 + Math.random() * 900000).toString();
+    // Use crypto.randomInt for SSR-safe random code
+    const crypto = await import('crypto');
+    const verifyCode = (crypto.randomInt(100000, 1000000)).toString();
 
     if (existingUserByEmail) {
       if (existingUserByEmail.isVerified) {
@@ -37,11 +39,14 @@ export async function POST(request: Request) {
           { status: 400 }
         );
       } else {
-        const hashedPassword = await bcrypt.hash(password, 10);
-        existingUserByEmail.password = hashedPassword;
-        existingUserByEmail.verifyCode = verifyCode;
-        existingUserByEmail.verifyCodeExpiry = new Date(Date.now() + 3600000);
-        await existingUserByEmail.save();
+    const hashedPassword = await bcrypt.hash(password, 10);
+    existingUserByEmail.password = hashedPassword;
+    existingUserByEmail.verifyCode = verifyCode;
+    // Use new Date() and setHours for expiry (SSR-safe)
+    const expiryDate = new Date();
+    expiryDate.setHours(expiryDate.getHours() + 1);
+    existingUserByEmail.verifyCodeExpiry = expiryDate;
+    await existingUserByEmail.save();
       }
     } else {
       const hashedPassword = await bcrypt.hash(password, 10);

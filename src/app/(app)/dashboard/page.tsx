@@ -134,20 +134,27 @@ export default function UserDashboard() {
     return <div></div>;
    }
 
-   const username= session?.user as User;//geting username
-  console.log('username', username)
-   //Setting up the URL for anonymous user to send the message
+  const username = session?.user as User;
+  console.log('username', username);
+  // Setting up the URL for anonymous user to send the message
+  const [profileUrl, setProfileUrl] = useState<string>("");
 
-   const baseUrl=`${window.location.protocol}//${window.location.host}`
-   const profileUrl= `${baseUrl}/u/${username.username}`;
+  useEffect(() => {
+    if (username && typeof window !== 'undefined') {
+      const baseUrl = `${window.location.protocol}//${window.location.host}`;
+      setProfileUrl(`${baseUrl}/u/${username.username}`);
+    }
+  }, [username]);
 
-   function copyToClipboard(){
-    navigator.clipboard.writeText(profileUrl);
-    toast({
-      title:'URL Copied',
-      description:'Profile URL has been copied to clipboard.',
-    })
-   }
+  function copyToClipboard() {
+    if (profileUrl && typeof window !== 'undefined') {
+      navigator.clipboard.writeText(profileUrl);
+      toast({
+        title: 'URL Copied',
+        description: 'Profile URL has been copied to clipboard.',
+      });
+    }
+  }
    
 
   return (
